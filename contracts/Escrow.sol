@@ -46,8 +46,8 @@ contract Escrow {
     Agreement public agreement;
 
     event Contribute(
-        address indexed _contributor,
-        uint indexed _value
+        address _contributor,
+        uint _value
     );
 
     constructor (uint256 _agreementPrice, address _clientAddress) public {
@@ -88,8 +88,10 @@ contract Escrow {
     function contributeFunding() public payable {
         agreement.funders[msg.sender] = msg.value;
         emit Contribute(msg.sender, msg.value);
-        assert(address(this).balance >= agreement.agreementPrice);
-        nextStage();
+
+        if (address(this).balance >= agreement.agreementPrice) {
+            nextStage();
+        }
     }
 
     // Provider
