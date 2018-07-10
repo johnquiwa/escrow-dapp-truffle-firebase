@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import ContractModal from './ContractModal'
+import ContractCreateModal from './ContractCreateModal';
 import { openModal, closeModal } from '../../../ducks/contractModal';
 
 const mapStateToProps = (state, ownProps) => {
@@ -19,9 +19,9 @@ const mapDispatchToProps = (dispatch) =>
     dispatch
   )
 
-const ContractModalContainer = connect(
+const ContractCreateModalContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ContractModal)
+)(ContractCreateModal)
 
-export default ContractModalContainer
+export default ContractCreateModalContainer

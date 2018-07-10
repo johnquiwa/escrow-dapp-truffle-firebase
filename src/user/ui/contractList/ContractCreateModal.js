@@ -1,11 +1,11 @@
 import React from 'react'
 import EscrowButtonContainer from '../escrowContract/EscrowButtonContainer'
-import ContractForm from './ContractForm'
+import ContractForm from './ContractCreateForm'
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import { CancelButton } from '../../../common/buttons/buttons';
 
-const ContractModal = (props) => {
+const ContractCreateModal = (props) => {
     return (
       <div>
         <RaisedButton label="Create Contract" onClick={props.openModal} />
@@ -22,4 +22,4 @@ const ContractModal = (props) => {
     );
 }
 
-export default ContractModal;
+export default ContractCreateModal;

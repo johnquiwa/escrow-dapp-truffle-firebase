@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ContractListContainer from '../../user/ui/contractList/ContractListContainer'
 import EscrowButtonContainer from '../../user/ui/escrowContract/EscrowButtonContainer'
-import ContractModalContainer from '../../user/ui/contractList/ContractModalContainer'
+import ContractCreateModalContainer from '../../user/ui/contractList/ContractCreateModalContainer'
 
 class ContractList extends Component {
   render() {
@@ -11,7 +11,7 @@ class ContractList extends Component {
           <div className="pure-u-1-1">
             <h1>Contracts</h1>
             <ContractListContainer />
-            <ContractModalContainer actions={[<EscrowButtonContainer />]}/>
+            <ContractCreateModalContainer actions={[<EscrowButtonContainer />]}/>
           </div>
         </div>
       </main>

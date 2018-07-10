@@ -3,12 +3,12 @@ const firebase = require('firebase');
 
 // Initialize Firebase
 const config = {
-  apiKey: process.env.apiKey,
-  authDomain: process.env.authDomain,
-  databaseURL: process.env.databaseURL,
-  projectId: process.env.projectId,
-  storageBucket: process.env.storageBucket,
-  messagingSenderId: process.env.messagingSenderId
+  apiKey: "AIzaSyD6ypc-tdzvmoNaHKz4rxoZwx5nTMAesAg",
+  authDomain: "escrow-eth.firebaseapp.com",
+  databaseURL: "https://escrow-eth.firebaseio.com",
+  projectId: "escrow-eth",
+  storageBucket: "escrow-eth.appspot.com",
+  messagingSenderId: "251713990636"
 };
 
 firebase.initializeApp(config);

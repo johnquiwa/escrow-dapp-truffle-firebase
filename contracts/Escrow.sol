@@ -23,7 +23,7 @@ contract Escrow {
     }
 
     modifier atStage(Stages _stage) {
-        assert(stage == _stage);
+        require(stage == _stage);
         _;
     }
 
@@ -45,9 +45,17 @@ contract Escrow {
 
     Agreement public agreement;
 
-    event Contribute(
+    event Contribute (
         address _contributor,
         uint _value
+    );
+
+    event Stage (
+        uint _value
+    );
+
+    event SetPreviewUrl (
+        bytes32 _value
     );
 
     constructor (uint256 _agreementPrice, address _clientAddress) public {
@@ -85,7 +93,11 @@ contract Escrow {
     }
 
     // Funding
-    function contributeFunding() public payable {
+    function contributeFunding()
+    public
+    payable
+    atStage(Stages.Funding)
+    {
         agreement.funders[msg.sender] = msg.value;
         emit Contribute(msg.sender, msg.value);
 
@@ -102,6 +114,7 @@ contract Escrow {
     isProvider
     {
         agreement.previewMessage = _previewMessage;
+        emit SetPreviewUrl(_previewMessage);
     }
 
     function setFinalMessage(bytes32 _finalMessage)
@@ -157,5 +170,6 @@ contract Escrow {
     // Internal
     function nextStage() internal {
         stage = Stages(uint(stage) + 1);
+        emit Stage(uint(stage));
     }
 }

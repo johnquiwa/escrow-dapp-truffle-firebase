@@ -6,18 +6,11 @@ import { closeModal } from '../../../ducks/contractModal';
 const contract = require('truffle-contract');
 
 export const USER_LOGGED_IN = 'USER_LOGGED_IN'
-function fundingContributed(user) {
-  return {
-    type: USER_LOGGED_IN,
-    payload: user
-  }
-}
 
 export function createContract() {
   let web3 = store.getState().web3.web3Instance;
-  let contractForm = store.getState().form.ContractForm.values;
+  let contractForm = store.getState().form.ContractCreateForm.values;
   let userWalletAddress = store.getState().user.data.userWalletAddress;
-  console.log(contractForm);
 
   // Double-check web3's status.
   if (typeof web3 !== 'undefined') {
