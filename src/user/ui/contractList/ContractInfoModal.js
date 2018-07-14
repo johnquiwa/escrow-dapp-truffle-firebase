@@ -1,5 +1,7 @@
 import * as React from 'react'
 import TextField from 'material-ui/TextField';
+import Button from '@material-ui/core/Button';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Dialog from 'material-ui/Dialog';
 import { CancelButton, ContributeFundingButton, SetPreviewUrlButton } from '../../../common/buttons/buttons';
 
@@ -10,7 +12,8 @@ class ContractInfoModal extends React.Component {
 
     this.state = {
       contributionAmount: 0,
-      previewUrl: ''
+      previewUrl: '',
+      buffer: ''
     }
   }
 
@@ -19,6 +22,21 @@ class ContractInfoModal extends React.Component {
       [event.target.name] : event.target.value
     })
   }
+
+  captureFile = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const file = event.target.files[0];
+    let reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => this.convertToBuffer(reader);
+  };
+
+  convertToBuffer = async(reader) => {
+    const buffer = await Buffer.from(reader.result);
+    console.log(buffer);
+    this.setState({buffer});
+  };
 
   renderContributeFundingStage() {
     const contributeFunding = () => {
@@ -52,7 +70,7 @@ class ContractInfoModal extends React.Component {
 
   renderSetStringsStage() {
     const setPreviewUrl = () => {
-      this.props.handleSetPreviewUrl(this.state.previewUrl);
+      this.props.handleSetPreviewUrl(this.state.buffer);
     };
     return (
       <Dialog
@@ -75,14 +93,24 @@ class ContractInfoModal extends React.Component {
           <h3>Funding Amount</h3>
           <p>{this.props.contract.bigNumFundingAmount ? this.props.contract.bigNumFundingAmount.toString() : null}</p>
           <h3>Preview Url</h3>
-          <p>{this.props.contract.previewUrl || null}</p>
-          <TextField
-            id="text-field-controlled"
-            name="previewUrl"
-            value={this.state.previewUrl}
-            onChange={this.handleChange.bind(this)}
-            type="string"
+          <p>
+            <a href={this.props.contract.previewUrl ? `https://gateway.ipfs.io/ipfs/${this.props.contract.previewUrl}` : null}>{this.props.contract.previewUrl || null}
+            </a>
+          </p>
+          <input
+            accept="image/*"
+            id="raised-button-file"
+            style={{display: 'none'}}
+            onChange={this.captureFile}
+            multiple
+            type="file"
           />
+          <label htmlFor="raised-button-file">
+            <Button color="primary" variant="raised" component="span">
+              Upload
+              <CloudUploadIcon style={{ marginLeft: '5px' }} />
+            </Button>
+          </label>
         </div>
       </Dialog>
     )

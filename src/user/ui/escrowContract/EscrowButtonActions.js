@@ -16,11 +16,12 @@ export function createContract() {
   if (typeof web3 !== 'undefined') {
     console.log('wev3', web3);
 
-    return function(dispatch) {
+    return async function(dispatch) {
       // Using truffle-contract we create the authentication object.
+      const accounts = await web3.eth.getAccounts();
       const escrowContract = contract(EscrowContract);
       escrowContract.setProvider(web3.currentProvider);
-      escrowContract.defaults({from: web3.eth.coinbase});
+      escrowContract.defaults({from: accounts[0]});
       return escrowContract.new(contractForm.ethPrice, contractForm.clientAddress)     
         .then(function(instance) {
           const updates = {};

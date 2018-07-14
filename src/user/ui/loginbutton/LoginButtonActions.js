@@ -41,7 +41,7 @@ export function loginUser() {
           authenticationInstance.login({from: coinbase})
           .then(function(result) {
             // If no error, login user.
-            var userName = web3.toUtf8(result)
+            var userName = web3.utils.toUtf8(result)
             firebase.createRef('users/' + coinbase).set({name: userName})
             dispatch(userLoggedIn({"name": userName, "userWalletAddress": coinbase}))
 
@@ -58,6 +58,7 @@ export function loginUser() {
           })
           .catch(function(result) {
             // If error, go to signup page.
+            console.log(result);
             console.error('Wallet ' + coinbase + ' does not have an account!')
 
             return browserHistory.push('/signup')

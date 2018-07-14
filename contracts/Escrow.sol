@@ -37,7 +37,8 @@ contract Escrow {
         uint256 agreementPrice;
         address clientAddress;
         address providerAddress;
-        bytes32 previewMessage;
+        bytes32 previewMessageOne;
+        bytes32 previewMessageTwo;
         bytes32 finalMessage;
         bool approved;
         mapping(address => uint256) funders;
@@ -55,7 +56,8 @@ contract Escrow {
     );
 
     event SetPreviewUrl (
-        bytes32 _value
+        bytes32 _partOne,
+        bytes32 _partTwo
     );
 
     constructor (uint256 _agreementPrice, address _clientAddress) public {
@@ -65,23 +67,24 @@ contract Escrow {
         agreement.approved = false;
     }
 
-    function getAgreement () public view returns
-    (
-        uint256 agreementPrice,
-        address clientAddress,
-        address providerAddress,
-        bytes32 previewMessage,
-        bytes32 finalMessage,
-        bool approved
-    )
-    {
-        agreementPrice = agreement.agreementPrice;
-        clientAddress = agreement.clientAddress;
-        providerAddress = agreement.providerAddress;
-        previewMessage = agreement.previewMessage;
-        finalMessage = agreement.finalMessage;
-        approved = approved;
-    }
+//    function getAgreement () public view returns
+//    (
+//        uint256 agreementPrice,
+//        address clientAddress,
+//        address providerAddress,
+//        bytes32 previewMessage,
+//        bytes32 finalMessage,
+//        bool approved
+//    )
+//    {
+//        agreementPrice = agreement.agreementPrice;
+//        clientAddress = agreement.clientAddress;
+//        providerAddress = agreement.providerAddress;
+//        previewMessage = agreement.previewMessageOne;
+//        previewMessage = agreement.previewMessageTwo;
+//        finalMessage = agreement.finalMessage;
+//        approved = approved;
+//    }
 
     function getProviderAddress () public view returns (address) {
 
@@ -108,24 +111,25 @@ contract Escrow {
 
     // Provider
     // Make sure to set these uint256 _agreementPrice, address _clientAddress
-    function setPreviewMessage(bytes32 _previewMessage)
+    function setPreviewMessage(bytes32 _previewMessageOne, bytes32 _previewMessageTwo)
     public
     atStage(Stages.SetStrings)
     isProvider
     {
-        agreement.previewMessage = _previewMessage;
-        emit SetPreviewUrl(_previewMessage);
+        agreement.previewMessageOne = _previewMessageOne;
+        agreement.previewMessageTwo = _previewMessageTwo;
+        emit SetPreviewUrl(_previewMessageOne, _previewMessageTwo);
     }
 
-    function setFinalMessage(bytes32 _finalMessage)
-    public
-    atStage(Stages.SetStrings)
-    isProvider
-    {
-        assert(agreement.previewMessage.length > 0);
-        agreement.finalMessage = _finalMessage;
-        nextStage();
-    }
+//    function setFinalMessage(bytes32 _finalMessage)
+//    public
+//    atStage(Stages.SetStrings)
+//    isProvider
+//    {
+//        assert(agreement.previewMessage.length > 0);
+//        agreement.finalMessage = _finalMessage;
+//        nextStage();
+//    }
 
     // Client
     function getPreviewMessage()
@@ -133,9 +137,9 @@ contract Escrow {
     view
     atStage(Stages.ApproveOrReject)
     isClient
-    returns (bytes32)
+    returns (bytes32, bytes32)
     {
-        return agreement.previewMessage;
+        return (agreement.previewMessageOne, agreement.previewMessageTwo);
     }
 
     function approvePreview()
