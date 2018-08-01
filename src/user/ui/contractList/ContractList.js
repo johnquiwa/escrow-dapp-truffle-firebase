@@ -26,7 +26,7 @@ class ContractList extends Component {
 
   render() {
     return(
-      <ContractListItem contractList={this.state.contractList} web3Instance={this.props.web3Instance}/>
+      <ContractListItem contractList={this.state.contractList} web3Instance={this.props.web3Instance} />
     )
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ContractListContainer from '../../user/ui/contractList/ContractListContainer'
 import EscrowButtonContainer from '../../user/ui/escrowContract/EscrowButtonContainer'
-import ContractCreateModalContainer from '../../user/ui/contractList/ContractCreateModalContainer'
+import ContractCreateModalContainer from '../../user/ui/contractCreate/ContractCreateModalContainer'
 
 class ContractList extends Component {
   render() {

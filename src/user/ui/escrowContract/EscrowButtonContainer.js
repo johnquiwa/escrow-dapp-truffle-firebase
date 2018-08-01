@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     clientAddress: state.clientAddress
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -17,11 +17,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(createContract())
     }
   }
-}
+};
 
 const EscrowButtonContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(EscrowButton)
+)(EscrowButton);
 
-export default EscrowButtonContainer
+export default EscrowButtonContainer;

@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
     name: state.user.data.name,
     web3Instance: state.web3.web3Instance
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -17,11 +17,11 @@ const mapDispatchToProps = (dispatch) => {
     //   dispatch(updateUser(name))
     }
   }
-}
+};
 
 const ContractListContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ContractList)
+)(ContractList);
 
 export default ContractListContainer

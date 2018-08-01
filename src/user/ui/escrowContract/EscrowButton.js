@@ -5,6 +5,6 @@ const EscrowButton = ({ onCreateContractClick }) => {
   return(
     <FlatButton label="Create Contract" primary={true} onClick={(event) => onCreateContractClick(event)} />
   )
-}
+};
 
 export default EscrowButton

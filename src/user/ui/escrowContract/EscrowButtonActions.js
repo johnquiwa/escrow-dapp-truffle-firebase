@@ -31,15 +31,15 @@ export function createContract() {
             client: contractForm.clientAddress,
             ethPrice: contractForm.ethPrice,
             txHash: instance.transactionHash
-          }
+          };
 
           updates[`users/${contractForm.clientAddress}/contracts/${instance.address}`] = {
             role: 'client'
-          }
+          };
 
           updates[`users/${userWalletAddress}/contracts/${instance.address}`] = {
             role: 'creator'
-          }
+          };
 
           return firebase.database.ref().update(updates);
         })
@@ -55,5 +55,3 @@ export function createContract() {
     console.error('Web3 is not initialized.');
   }
 }
-
-// escrowContract.new("10000000", "0xf17f52151ebef6c7334fad080c5704d77216b732")     

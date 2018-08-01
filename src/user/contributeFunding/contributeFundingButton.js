@@ -6,6 +6,6 @@ const EscrowButton = ({ onContributeFundingClick }) => {
       <a href="#" className="pure-menu-link" onClick={(event) => onContributeFundingClick(event)}>Contribute Funding</a>
     </li>
   )
-}
+};
 
 export default EscrowButton

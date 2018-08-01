@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class ProfileForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       name: this.props.name
@@ -10,18 +10,18 @@ class ProfileForm extends Component {
   }
 
   onInputChange(event) {
-    this.setState({ name: event.target.value })
+    this.setState({ name: event.target.value });
   }
 
   handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     if (this.state.name.length < 2)
     {
       return alert('Please fill in your name.')
     }
 
-    this.props.onProfileFormSubmit(this.state.name)
+    this.props.onProfileFormSubmit(this.state.name);
   }
 
   render() {
@@ -41,4 +41,4 @@ class ProfileForm extends Component {
   }
 }
 
-export default ProfileForm
+export default ProfileForm;

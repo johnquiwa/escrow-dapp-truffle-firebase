@@ -1,6 +1,6 @@
-import React from 'react'
-import EscrowButtonContainer from '../escrowContract/EscrowButtonContainer'
-import ContractForm from './ContractCreateForm'
+import React from 'react';
+import EscrowButtonContainer from '../escrowContract/EscrowButtonContainer';
+import ContractForm from './ContractCreateForm';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import { CancelButton } from '../../../common/buttons/buttons';
@@ -20,6 +20,6 @@ const ContractCreateModal = (props) => {
         </Dialog>
       </div>
     );
-}
+};
 
 export default ContractCreateModal;

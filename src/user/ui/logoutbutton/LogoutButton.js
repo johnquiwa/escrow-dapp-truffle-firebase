@@ -6,6 +6,6 @@ const LogoutButton = ({ onLogoutUserClick }) => {
       <a href="#" className="pure-menu-link" onClick={(event) => onLogoutUserClick(event)}>Logout</a>
     </li>
   )
-}
+};
 
-export default LogoutButton
+export default LogoutButton;

@@ -1,6 +1,6 @@
 const initialState = {
   data: null
-}
+};
 
 const userReducer = (state = initialState, action) => {
   if (action.type === 'USER_LOGGED_IN' || action.type === 'USER_UPDATED')
@@ -18,6 +18,6 @@ const userReducer = (state = initialState, action) => {
   }
 
   return state
-}
+};
 
-export default userReducer
+export default userReducer;

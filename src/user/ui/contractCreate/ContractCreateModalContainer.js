@@ -1,4 +1,4 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ContractCreateModal from './ContractCreateModal';
 import { openModal, closeModal } from '../../../ducks/contractModal';
@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     open: state.contractModal.open,
     web3Instance: state.web3.web3Instance
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
@@ -17,11 +17,11 @@ const mapDispatchToProps = (dispatch) =>
       closeModal
     },
     dispatch
-  )
+  );
 
 const ContractCreateModalContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ContractCreateModal)
+)(ContractCreateModal);
 
-export default ContractCreateModalContainer
+export default ContractCreateModalContainer;

@@ -67,24 +67,14 @@ contract Escrow {
         agreement.approved = false;
     }
 
-//    function getAgreement () public view returns
-//    (
-//        uint256 agreementPrice,
-//        address clientAddress,
-//        address providerAddress,
-//        bytes32 previewMessage,
-//        bytes32 finalMessage,
-//        bool approved
-//    )
-//    {
-//        agreementPrice = agreement.agreementPrice;
-//        clientAddress = agreement.clientAddress;
-//        providerAddress = agreement.providerAddress;
-//        previewMessage = agreement.previewMessageOne;
-//        previewMessage = agreement.previewMessageTwo;
-//        finalMessage = agreement.finalMessage;
-//        approved = approved;
-//    }
+    function getAgreementPrice ()
+    public
+    view
+    returns
+    (uint256 agreementPrice)
+    {
+        return agreement.agreementPrice;
+    }
 
     function getProviderAddress () public view returns (address) {
 

@@ -6,6 +6,6 @@ const LoginButton = ({ onLoginUserClick }) => {
       <a href="#" className="pure-menu-link" onClick={(event) => onLoginUserClick(event)}>Login</a>
     </li>
   )
-}
+};
 
 export default LoginButton

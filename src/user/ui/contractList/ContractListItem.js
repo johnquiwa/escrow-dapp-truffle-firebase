@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import EscrowContract from '../../../../build/contracts/Escrow.json';
-import ContractInfoView from './ContractInfoModal';
+import ContractInfoView from '../contractInfo/ContractInfoModal';
 import {BigNumber} from 'bignumber.js';
 import ipfs from '../../../util/ipfs';
 
@@ -9,9 +9,7 @@ const contract = require('truffle-contract');
 
 class ContractListItem extends Component {
   constructor(props) {
-    super(props)
-
-    console.log(this.props.web3Instance.utils.toAscii('0x516d5a446f345a7669614d706a4e4b3365666b4b767a6a59556d423242616b6a45674773515678784d5172636263'))
+    super(props);
 
     this.state = {
       open : false,
@@ -31,7 +29,9 @@ class ContractListItem extends Component {
   }
 
   async handleClickContract(contractAddress) {
-    this.setState({ 'open' : true, bigNumFundingAmount : new BigNumber(0)});
+    this.setState({
+      'open' : true, bigNumFundingAmount : new BigNumber(0)
+    });
 
     const escrowContract = contract(EscrowContract);
     escrowContract.setProvider(this.props.web3Instance.currentProvider);
@@ -41,12 +41,12 @@ class ContractListItem extends Component {
     const clickedContract = escrowContract.at(contractAddress);
 
     // Get Events
-    const contributeEvent = clickedContract.Contribute({_from:this.state.accounts[0]},{fromBlock: 0, toBlock: 'latest'});
-    const stageEvent = clickedContract.Stage({_from:this.state.accounts[0]},{fromBlock: 0, toBlock: 'latest'});
-    const setPreviewUrlEvent = clickedContract.SetPreviewUrl({_from:this.state.accounts[0]},{fromBlock: 0, toBlock: 'latest'});
+    const contributeEvent = clickedContract.Contribute({_from:this.state.accounts[0]}, {fromBlock: 0, toBlock: 'latest'});
+    const stageEvent = clickedContract.Stage({_from:this.state.accounts[0]}, {fromBlock: 0, toBlock: 'latest'});
+    const setPreviewUrlEvent = clickedContract.SetPreviewUrl({_from:this.state.accounts[0]}, {fromBlock: 0, toBlock: 'latest'});
 
 
-    // Create Event Waters
+    // Create Event Watchers
     contributeEvent.watch((error, result) => {
       if (!error)
         console.log('contrib', result);
@@ -66,22 +66,32 @@ class ContractListItem extends Component {
     setPreviewUrlEvent.watch((error, result) => {
       if (!error) {
         console.log('url', result);
-        this.setState({previewUrl : this.props.web3Instance.utils.toUtf8(result.args._partOne) + this.props.web3Instance.utils.toUtf8(result.args._partTwo)})
+        this.setState({
+          previewUrl : this.props.web3Instance.utils.toUtf8(result.args._partOne) + this.props.web3Instance.utils.toUtf8(result.args._partTwo)
+        })
       } else {
         console.log(error);
       }
     });
 
+    // Get Info From Contract
+    const clientAddress = await clickedContract.getClientAddress();
+    const providerAddress = await clickedContract.getClientAddress();
+    const agreementPrice = await clickedContract.getAgreementPrice();
     const stage = await clickedContract.stage();
     const bigNumStage = new BigNumber(stage);
-
     const accounts = await this.props.web3Instance.eth.getAccounts();
+
     this.setState({
-        bigNumStage,
-        clickedContract,
-        accounts,
-        contractAddress: contractAddress,
+      agreementPrice,
+      clientAddress,
+      providerAddress,
+      bigNumStage,
+      clickedContract,
+      accounts,
+      contractAddress: contractAddress,
     });
+    console.log(this.state);
   }
 
   handleContributeFunding(contributionAmount) {
@@ -114,11 +124,12 @@ class ContractListItem extends Component {
   renderContractInfoView(contract) {
     if (contract.contributeFunding) {
       return (
-        <ContractInfoView contract={this.state}
-                          handleCloseModal={this.handleCloseModal.bind(this)}
-                          handleContributeFunding={this.handleContributeFunding.bind(this)}
-                          handleSetPreviewUrl={this.handleSetPreviewUrl.bind(this)}
-                          open={this.state.open}
+        <ContractInfoView
+          contract={this.state}
+          handleCloseModal={this.handleCloseModal.bind(this)}
+          handleContributeFunding={this.handleContributeFunding.bind(this)}
+          handleSetPreviewUrl={this.handleSetPreviewUrl.bind(this)}
+          open={this.state.open}
         />
       )
     }

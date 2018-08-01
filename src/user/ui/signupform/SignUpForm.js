@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class SignUpForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       name: ''
@@ -10,18 +10,18 @@ class SignUpForm extends Component {
   }
 
   onInputChange(event) {
-    this.setState({ name: event.target.value })
+    this.setState({ name: event.target.value });
   }
 
   handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     if (this.state.name.length < 2)
     {
       return alert('Please fill in your name.')
     }
 
-    this.props.onSignUpFormSubmit(this.state.name)
+    this.props.onSignUpFormSubmit(this.state.name);
   }
 
   render() {
@@ -41,4 +41,4 @@ class SignUpForm extends Component {
   }
 }
 
-export default SignUpForm
+export default SignUpForm;
