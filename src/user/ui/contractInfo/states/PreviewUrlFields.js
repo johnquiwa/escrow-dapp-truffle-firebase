@@ -1,7 +1,7 @@
 import React from 'react';
-import ContractInfoPreviewUrl from './common/ContractInfoPreviewUrl.js';
-import CaptureFileInput from './common/CaptureFileInput.js';
-import UploadButton from './common/UploadButton.js'
+import ContractInfoPreviewUrl from '../components/ContractInfoPreviewUrl.js';
+import CaptureFileInput from '../components/CaptureFileInput.js';
+import UploadButton from '../components/UploadButton.js'
 
 const PreviewUrlFields = (props) => {
   const {
@@ -19,7 +19,7 @@ const PreviewUrlFields = (props) => {
       <CaptureFileInput captureFile={captureFile} />
       <UploadButton />
     </div>
-  )
+  );
 
   return (
     <div>

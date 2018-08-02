@@ -1,5 +1,5 @@
-import { connect } from 'react-redux'
-import Modal from './Modal'
+import { connect } from 'react-redux';
+import Modal from './Modal';
 // import { createContract } from './EscrowButtonActions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -7,15 +7,15 @@ const mapStateToProps = (state, ownProps) => {
     open: state.modal.open,
     actions: ownProps.actions
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {}
-}
+};
 
 const ModalContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Modal)
+)(Modal);
 
 export default ModalContainer

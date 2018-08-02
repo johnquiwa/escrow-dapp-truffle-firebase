@@ -13,6 +13,6 @@ const reducer = combineReducers({
   user: userReducer,
   modal: ModalReducer,
   web3: web3Reducer
-})
+});
 
 export default reducer

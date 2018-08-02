@@ -1,10 +1,10 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
-import TransactionLink from './common/TransactionLink';
-import Stage from './common/Stage';
+import TransactionLink from './components/TransactionLink';
+import Stage from './components/Stage';
+import FundingFields from './states/ContractInfoFundingFields';
+import PreviewUrlFields from './states/PreviewUrlFields';
 import { CancelButton, ContributeFundingButton, SetPreviewUrlButton } from '../../../common/buttons/buttons';
-import FundingFields from './ContractInfoFundingFields';
-import PreviewUrlFields from './PreviewUrlFields';
 
 const ContractModalDialog = (props) => {
   const {
@@ -48,8 +48,6 @@ const ContractModalDialog = (props) => {
   };
 
   const stage = Number(bigNumStage);
-
-  console.log(assembleActions());
 
   return (
     <Dialog

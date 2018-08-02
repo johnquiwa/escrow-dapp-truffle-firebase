@@ -1,6 +1,6 @@
 import React from 'react';
-import FundingAmount from './common/FundingAmount';
-import ContributionTextField from './common/ContributionTextField';
+import FundingAmount from '../components/FundingAmount';
+import ContributionTextField from '../components/ContributionTextField';
 
 const FundingFields = (props) => {
   const {

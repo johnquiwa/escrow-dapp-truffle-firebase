@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import EscrowButton from './EscrowButton'
-import { createContract } from './EscrowButtonActions'
+import { createContract } from '../../../ducks/EscrowButton'
 
 const mapStateToProps = (state, ownProps) => {
   console.log('state', state);

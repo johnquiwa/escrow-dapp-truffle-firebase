@@ -1,11 +1,8 @@
-import EscrowContract from '../../../../build/contracts/Escrow.json'
-import store from '../../../store'
-import firebase from '../../../util/firebase'
-import { closeModal } from '../../../ducks/contractModal';
+import EscrowContract from '../../build/contracts/Escrow.json'
+import store from '../store'
+import firebase from '../util/firebase'
 
 const contract = require('truffle-contract');
-
-export const USER_LOGGED_IN = 'USER_LOGGED_IN'
 
 export function createContract() {
   let web3 = store.getState().web3.web3Instance;

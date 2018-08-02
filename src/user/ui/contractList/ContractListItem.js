@@ -41,18 +41,27 @@ class ContractListItem extends Component {
     const clickedContract = escrowContract.at(contractAddress);
 
     // Get Events
-    const contributeEvent = clickedContract.Contribute({_from:this.state.accounts[0]}, {fromBlock: 0, toBlock: 'latest'});
-    const stageEvent = clickedContract.Stage({_from:this.state.accounts[0]}, {fromBlock: 0, toBlock: 'latest'});
-    const setPreviewUrlEvent = clickedContract.SetPreviewUrl({_from:this.state.accounts[0]}, {fromBlock: 0, toBlock: 'latest'});
-
+    const contributeEvent = clickedContract.Contribute(
+      {_from:this.state.accounts[0]},
+      {fromBlock: 0, toBlock: 'latest'}
+    );
+    const stageEvent = clickedContract.Stage(
+      {_from:this.state.accounts[0]},
+      {fromBlock: 0, toBlock: 'latest'}
+    );
+    const setPreviewUrlEvent = clickedContract.SetPreviewUrl(
+      {_from:this.state.accounts[0]},
+      {fromBlock: 0, toBlock: 'latest'}
+    );
 
     // Create Event Watchers
     contributeEvent.watch((error, result) => {
       if (!error)
         console.log('contrib', result);
-      this.setState({bigNumFundingAmount: this.state.bigNumFundingAmount.plus(result.args._value)})
+      this.setState({
+        bigNumFundingAmount: this.state.bigNumFundingAmount.plus(result.args._value)
+      })
     });
-
 
     stageEvent.watch((error, result) => {
       if (!error) {
@@ -64,10 +73,12 @@ class ContractListItem extends Component {
     });
 
     setPreviewUrlEvent.watch((error, result) => {
+      const partOne = this.props.web3Instance.utils.toUtf8(result.args._partOne);
+      const partTwo = this.props.web3Instance.utils.toUtf8(result.args._partTwo);
       if (!error) {
         console.log('url', result);
         this.setState({
-          previewUrl : this.props.web3Instance.utils.toUtf8(result.args._partOne) + this.props.web3Instance.utils.toUtf8(result.args._partTwo)
+          previewUrl : partOne + partTwo
         })
       } else {
         console.log(error);
@@ -91,7 +102,6 @@ class ContractListItem extends Component {
       accounts,
       contractAddress: contractAddress,
     });
-    console.log(this.state);
   }
 
   handleContributeFunding(contributionAmount) {
@@ -104,7 +114,6 @@ class ContractListItem extends Component {
   }
 
   handleSetPreviewUrl = async (previewUrl) => {
-    console.log(this.state.accounts[0]);
     const escrowContract = contract(EscrowContract);
     escrowContract.setProvider(this.props.web3Instance.currentProvider);
     escrowContract.defaults({from: this.state.accounts[0]});
@@ -141,7 +150,9 @@ class ContractListItem extends Component {
       <ul>
         {
           this.props.contractList.map(contract => {
-            return <li key={contract.contract} onClick={() => this.handleClickContract(contract.contract)}>{contract.contract}</li>
+            return <li key={contract.contract}
+                       onClick={() => this.handleClickContract(contract.contract)}>{contract.contract}
+                   </li>
           })
         }
           {this.renderContractInfoView(this.state.clickedContract)}
